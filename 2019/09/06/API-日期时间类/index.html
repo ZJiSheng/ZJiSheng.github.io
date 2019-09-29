@@ -1,0 +1,147 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta name="generator" content="Hexo 3.9.0"><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description"><link rel="stylesheet" type="text/css" href="//fonts.loli.net/css?family=Source+Code+Pro"><link rel="stylesheet" type="text/css" href="/css/style.css?v=2.0.4"><link rel="stylesheet" type="text/css" href="/css/highlight.css?v=2.0.4"><link rel="Shortcut Icon" href="/favicon.ico"><link rel="bookmark" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><title>API_日期时间类 | Z-jisheng</title></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">API_日期时间类</h1><a id="logo" href="/.">Z-jisheng</a><p class="description"></p></div><div id="nav-menu"><a href="/." class="current"><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a><a href="/atom.xml"><i class="fa fa-rss"> 订阅</i></a></div><div id="search-form"><div id="result-mask" class="hide"></div><label><input id="search-key" type="text" autocomplete="off" placeholder="搜索"></label><div id="result-wrap" class="hide"><div id="search-result"></div></div><div class="hide"><template id="search-tpl"><div class="item"><a href="/{path}" title="{title}"><div class="title">{title}</div><div class="time">{date}</div><div class="tags">{tags}</div></a></div></template></div></div></div><div id="layout" class="layout-g"><div class="layout-l"><div class="content_container"><div class="post"><h1 class="post-title">API_日期时间类</h1><div class="post-meta"><a href="/2019/09/06/API-日期时间类/#comments" class="comment-count"></a><p><span class="date">Sep 06, 2019</span><span><a href="/categories/java基础/" class="category">java基础</a></span><span><i id="busuanzi_container_page_pv"><i id="busuanzi_value_page_pv"></i><i>点击</i></i></span></p></div><div class="post-content"><h1 id="日期时间类"><a href="#日期时间类" class="headerlink" title="日期时间类"></a>日期时间类</h1><h2 id="1-1-Date类"><a href="#1-1-Date类" class="headerlink" title="1.1 Date类"></a>1.1 Date类</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p><code>java.util.Date</code>类 表示特定的瞬间，精确到毫秒。</p>
+<ul>
+<li><p>public Date()`：分配Date对象并初始化此对象，以表示分配它的时间（精确到毫秒）。</p>
+</li>
+<li><p><code>public Date(long date)</code>：分配Date对象并初始化此对象，以表示自从标准基准时间（称为“历元（epoch）”，即1970年1月1日00:00:00 GMT）以来的指定毫秒数。</p>
+</li>
+</ul>
+<blockquote>
+<p>tips: 由于我们处于东八区，所以我们的基准时间为1970年1月1日8时0分0秒。</p>
+</blockquote>
+<h3 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h3><p>Date类中的多数方法已经过时，常用的方法有：</p>
+<ul>
+<li><code>public long getTime()</code> 把日期对象转换成对应的时间毫秒值。</li>
+</ul>
+<h2 id="1-2-DateFormat类"><a href="#1-2-DateFormat类" class="headerlink" title="1.2 DateFormat类"></a>1.2 DateFormat类</h2><p><code>java.text,DateFormat</code> 是日期/时间格式化子类的抽象类，我们通过这个类可以帮助我们完成日期和文本之间的转换，也就是可以在Date对象与String对象之间进行来回转换。</p>
+<ul>
+<li><p><strong>格式化</strong>：按照指定的格式，从Date对象转换为String对象。</p>
+</li>
+<li><p><strong>解析</strong>：按照指定的格式，从String对象转换为Date对象。</p>
+</li>
+</ul>
+<h3 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h3><p>由于DateFormat为抽象类，不能直接使用，所以需要常用的子类<code>java.text.SimpleDateFormat</code>。这个类需要一个模式（格式）来指定格式化或解析的标准。构造方法为：</p>
+<ul>
+<li><code>public SimpleDateFormat(String pattern)</code>：用给定的模式和默认语言环境的日期格式符号构造SimpleDateFormat。</li>
+</ul>
+<p>参数pattern是一个字符串，代表日期时间的自定义格式。</p>
+<h3 id="格式规则"><a href="#格式规则" class="headerlink" title="格式规则"></a>格式规则</h3><p>常用的格式规则为：</p>
+<table>
+<thead>
+<tr>
+<th>标识字母（区分大小写）</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>y</td>
+<td>年</td>
+</tr>
+<tr>
+<td>M</td>
+<td>月</td>
+</tr>
+<tr>
+<td>d</td>
+<td>日</td>
+</tr>
+<tr>
+<td>H</td>
+<td>时</td>
+</tr>
+<tr>
+<td>m</td>
+<td>分</td>
+</tr>
+<tr>
+<td>s</td>
+<td>秒</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>备注：更详细的格式规则，可以参考SimpleDateFormat类的API文档。</p>
+</blockquote>
+<p>创建SimpleDateFormat对象的代码如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.text.DateFormat;</span><br><span class="line"><span class="keyword">import</span> java.text.SimpleDateFormat;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo02SimpleDateFormat</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 对应的日期格式如：2018-01-16 15:06:38</span></span><br><span class="line">        DateFormat format = <span class="keyword">new</span> SimpleDateFormat(<span class="string">"yyyy-MM-dd HH:mm:ss"</span>);</span><br><span class="line">    &#125;    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="常用方法-1"><a href="#常用方法-1" class="headerlink" title="常用方法"></a>常用方法</h3><p>DateFormat类的常用方法有：</p>
+<ul>
+<li><p><code>public String format(Date date)</code>：将Date对象格式化为字符串。</p>
+</li>
+<li><p><code>public Date parse(String source)</code>：将字符串解析为Date对象。</p>
+</li>
+</ul>
+<h2 id="1-3-Calendar类"><a href="#1-3-Calendar类" class="headerlink" title="1.3 Calendar类"></a>1.3 Calendar类</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p><code>java.util.Calendar</code>是日历类，在Date后出现，替换掉了许多Date的方法。该类将所有可能用到的时间信息封装为静态成员变量，方便获取。日历类就是方便获取各个时间属性的。</p>
+<h3 id="获取方式"><a href="#获取方式" class="headerlink" title="获取方式"></a>获取方式</h3><p>Calendar为抽象类，由于语言敏感性，Calendar类在创建对象时并非直接创建，而是通过静态方法创建，返回子类对象，如下：</p>
+<p>Calendar静态方法</p>
+<ul>
+<li><code>public static Calendar getInstance()</code>：使用默认时区和语言环境获得一个日历</li>
+</ul>
+<p>例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Calendar;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo06CalendarInit</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Calendar cal = Calendar.getInstance();</span><br><span class="line">    &#125;    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="常用方法-2"><a href="#常用方法-2" class="headerlink" title="常用方法"></a>常用方法</h3><p>根据Calendar类的API文档，常用方法有：</p>
+<ul>
+<li><code>public int get(int field)</code>：返回给定日历字段的值。</li>
+<li><code>public void set(int field, int value)</code>：将给定的日历字段设置为给定值。</li>
+<li><code>public abstract void add(int field, int amount)</code>：根据日历的规则，为给定的日历字段添加或减去指定的时间量。</li>
+<li><code>public Date getTime()</code>：返回一个表示此Calendar时间值（从历元到现在的毫秒偏移量）的Date对象。</li>
+</ul>
+<p>Calendar类中提供很多成员常量，代表给定的日历字段：</p>
+<table>
+<thead>
+<tr>
+<th>字段值</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>YEAR</td>
+<td>年</td>
+</tr>
+<tr>
+<td>MONTH</td>
+<td>月（从0开始，可以+1使用）</td>
+</tr>
+<tr>
+<td>DAY_OF_MONTH</td>
+<td>月中的天（几号）</td>
+</tr>
+<tr>
+<td>HOUR</td>
+<td>时（12小时制）</td>
+</tr>
+<tr>
+<td>HOUR_OF_DAY</td>
+<td>时（24小时制）</td>
+</tr>
+<tr>
+<td>MINUTE</td>
+<td>分</td>
+</tr>
+<tr>
+<td>SECOND</td>
+<td>秒</td>
+</tr>
+<tr>
+<td>DAY_OF_WEEK</td>
+<td>周中的天（周几，周日为1，可以-1使用）</td>
+</tr>
+</tbody></table>
+<h4 id="get-set方法"><a href="#get-set方法" class="headerlink" title="get/set方法"></a>get/set方法</h4><p>get方法用来获取指定字段的值，set方法用来设置指定字段的值，代码使用演示：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Calendar;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CalendarUtil</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 创建Calendar对象</span></span><br><span class="line">        Calendar cal = Calendar.getInstance();</span><br><span class="line">        <span class="comment">// 设置年 </span></span><br><span class="line">        <span class="keyword">int</span> year = cal.get(Calendar.YEAR);</span><br><span class="line">        <span class="comment">// 设置月</span></span><br><span class="line">        <span class="keyword">int</span> month = cal.get(Calendar.MONTH) + <span class="number">1</span>;</span><br><span class="line">        <span class="comment">// 设置日</span></span><br><span class="line">        <span class="keyword">int</span> dayOfMonth = cal.get(Calendar.DAY_OF_MONTH);</span><br><span class="line">        System.out.print(year + <span class="string">"年"</span> + month + <span class="string">"月"</span> + dayOfMonth + <span class="string">"日"</span>);</span><br><span class="line">    &#125;    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Calendar;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo07CalendarMethod</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Calendar cal = Calendar.getInstance();</span><br><span class="line">        cal.set(Calendar.YEAR, <span class="number">2020</span>);</span><br><span class="line">        System.out.print(year + <span class="string">"年"</span> + month + <span class="string">"月"</span> + dayOfMonth + <span class="string">"日"</span>); <span class="comment">// 2020年1月17日</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="add方法"><a href="#add方法" class="headerlink" title="add方法"></a>add方法</h4><p>add方法可以对指定日历字段的值进行加减操作，如果第二个参数为正数则加上偏移量，如果为负数则减去偏移量。代码如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Calendar;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo08CalendarMethod</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Calendar cal = Calendar.getInstance();</span><br><span class="line">        System.out.print(year + <span class="string">"年"</span> + month + <span class="string">"月"</span> + dayOfMonth + <span class="string">"日"</span>); <span class="comment">// 2018年1月17日</span></span><br><span class="line">        <span class="comment">// 使用add方法</span></span><br><span class="line">        cal.add(Calendar.DAY_OF_MONTH, <span class="number">2</span>); <span class="comment">// 加2天</span></span><br><span class="line">        cal.add(Calendar.YEAR, -<span class="number">3</span>); <span class="comment">// 减3年</span></span><br><span class="line">        System.out.print(year + <span class="string">"年"</span> + month + <span class="string">"月"</span> + dayOfMonth + <span class="string">"日"</span>); <span class="comment">// 2015年1月18日; </span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="getTime方法"><a href="#getTime方法" class="headerlink" title="getTime方法"></a>getTime方法</h4><p>Calendar中的getTime方法并不是获取毫秒时刻，而是拿到对应的Date对象。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Calendar;</span><br><span class="line"><span class="keyword">import</span> java.util.Date;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo09CalendarMethod</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Calendar cal = Calendar.getInstance();</span><br><span class="line">        Date date = cal.getTime();</span><br><span class="line">        System.out.println(date); <span class="comment">// Tue Jan 16 16:03:09 CST 2018</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>小贴士：</p>
+<p>​     西方星期的开始为周日，中国为周一。</p>
+<p>​     在Calendar类中，月份的表示是以0-11代表1-12月。</p>
+<p>​     日期是有大小关系的，时间靠后，时间越大。</p>
+</blockquote>
+</div><div class="post-copyright"><blockquote><p>原文作者: ��ʢ(zjisheng)</p><p>原文链接: <a href="http://yoursite.com/2019/09/06/API-日期时间类/">http://yoursite.com/2019/09/06/API-日期时间类/</a></p><p>版权声明: 转载请注明出处(必须保留作者署名及链接)</p></blockquote></div><div class="tags"><a href="/tags/时间日历/">时间日历</a></div><div class="post-share"><div class="social-share"><span>分享到:</span></div></div><div class="post-nav"><a href="/2019/09/06/Collection集合/" class="pre">Collection集合</a></div><div id="comments"></div></div></div></div><div class="layout-r"><div id="sidebar"><div class="search-pla"></div><div id="toc" class="widget"><div class="widget-title"><i class="fa fa-fei">文章目录</i></div><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#日期时间类"><span class="toc-text">日期时间类</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-Date类"><span class="toc-text">1.1 Date类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#概述"><span class="toc-text">概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常用方法"><span class="toc-text">常用方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-DateFormat类"><span class="toc-text">1.2 DateFormat类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#构造方法"><span class="toc-text">构造方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#格式规则"><span class="toc-text">格式规则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常用方法-1"><span class="toc-text">常用方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-Calendar类"><span class="toc-text">1.3 Calendar类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#概念"><span class="toc-text">概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#获取方式"><span class="toc-text">获取方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常用方法-2"><span class="toc-text">常用方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#get-set方法"><span class="toc-text">get/set方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#add方法"><span class="toc-text">add方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#getTime方法"><span class="toc-text">getTime方法</span></a></li></ol></li></ol></li></ol></li></ol></div><div class="widget"><div class="widget-title"><i class="fa fa-xie"> 最新文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/09/29/hello-world/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/22/SpringMVC的基本概念/">SpringMVC的基本概念</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/18/Map的遍历方式/">Map的遍历方式</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/18/Map/">Map</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/11/Set/">Set</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/09/List/">List</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/08/Java类加载机制/">Java类加载机制</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/08/Servlet周期包含哪些/">Servlet周期包含哪些</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/08/运算符优先级最高级/">运算符优先级最高级</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/06/Iterator迭代器/"> Iterator迭代器</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-gui"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/SpringMVC/">SpringMVC</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java基础/">java基础</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/牛客题库/">牛客题库</a><span class="category-list-count">3</span></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-biao"> 标签</i></div><div class="tagcloud"><a href="/tags/时间日历/" style="font-size: 15px;">时间日历</a> <a href="/tags/集合/" style="font-size: 15px;">集合</a> <a href="/tags/Java专题练习/" style="font-size: 15px;">Java专题练习</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-archive"> 归档</i></div><ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-you"> 友情链接</i></div><ul></ul><a href="http://www.example1.com/" title="site-name1" target="_blank">site-name1</a><ul></ul><a href="http://www.example2.com/" title="site-name2" target="_blank">site-name2</a><ul></ul><a href="http://www.example3.com/" title="site-name3" target="_blank">site-name3</a></div></div></div></div><a id="totop" href="#top"></a><div id="footer"><div class="footer-info"><p><a href="/baidusitemap.xml">网站地图</a> |  <a href="/atom.xml">订阅本站</a> |  <a href="/about/">联系博主</a></p><p>本站总访问量：<i id="busuanzi_container_site_pv"><i id="busuanzi_value_site_pv"></i></i>次，本站总访客数:<i id="busuanzi_container_site_uv"><i id="busuanzi_value_site_uv"></i></i>人</p><p><span> Copyright &copy;<a href="/." rel="nofollow">��ʢ(zjisheng).</a></span><span> Theme by<a rel="nofollow" target="_blank" href="https://github.com/chaooo/hexo-theme-BlueLake"> BlueLake.</a></span><span> Count by<a href="http://busuanzi.ibruce.info/"> busuanzi.</a></span><span> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a></span></p></div></div></div><script src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script><script type="text/javascript" src="/js/search.json.js?v=2.0.4"></script><script type="text/javascript" src="/js/toctotop.js?v=2.0.4" async></script><link rel="stylesheet" type="text/css" href="/share/css/share.css"><script type="text/javascript" src="/share/js/social-share.js" charset="utf-8"></script><script type="text/javascript" src="/share/js/qrcode.js" charset="utf-8"></script></body></html>
