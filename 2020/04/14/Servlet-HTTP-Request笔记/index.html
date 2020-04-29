@@ -132,23 +132,14 @@
                     *  ServletInputStream getInputStream()：获取字节输入流，可以操作所有类型数据
                         * 在文件上传知识点后讲解
 
-                2. 再从流对象中拿数据</code></pre><p>​<br>        2. 其他功能：<br>            1. 获取请求参数通用方式：不论get还是post请求方式都可以使用下列方法来获取请求参数<br>                1. String getParameter(String name):根据参数名称获取参数值    username=zs&amp;password=123<br>                2. String[] getParameterValues(String name):根据参数名称获取参数值的数组  hobby=xx&amp;hobby=game<br>                3. Enumeration<string> getParameterNames():获取所有请求的参数名称<br>                4. Map&lt;String,String[]&gt; getParameterMap():获取所有参数的map集合</string></p>
-<pre><code>* 中文乱码问题：
-    * get方式：tomcat 8 已经将get方式乱码问题解决了
-    * post方式：会乱码
-        * 解决：在获取参数前，设置request的编码request.setCharacterEncoding(&quot;utf-8&quot;);</code></pre><p>​<br>            2. 请求转发：一种在服务器内部的资源跳转方式<br>                1. 步骤：<br>                    1. 通过request对象获取请求转发器对象：RequestDispatcher getRequestDispatcher(String path)<br>                    2. 使用RequestDispatcher对象来进行转发：forward(ServletRequest request, ServletResponse response) </p>
-<pre><code>    2. 特点：
-        1. 浏览器地址栏路径不发生变化
-        2. 只能转发到当前服务器内部资源中。
-        3. 转发是一次请求
-
-
-3. 共享数据：
+                2. 再从流对象中拿数据</code></pre><p>​<br>​        2. 其他功能：<br>​            1. 获取请求参数通用方式：不论get还是post请求方式都可以使用下列方法来获取请求参数<br>​                1. String getParameter(String name):根据参数名称获取参数值    username=zs&amp;password=123<br>​                2. String[] getParameterValues(String name):根据参数名称获取参数值的数组  hobby=xx&amp;hobby=game<br>​                3. Enumeration<string> getParameterNames():获取所有请求的参数名称<br>​                4. Map&lt;String,String[]&gt; getParameterMap():获取所有参数的map集合<br>​<br>                * 中文乱码问题：<br>                    * get方式：tomcat 8 已经将get方式乱码问题解决了<br>                    * post方式：会乱码<br>                        * 解决：在获取参数前，设置request的编码request.setCharacterEncoding(“utf-8”);</string></p>
+<p>​<br>​            2. 请求转发：一种在服务器内部的资源跳转方式<br>​                1. 步骤：<br>​                    1. 通过request对象获取请求转发器对象：RequestDispatcher getRequestDispatcher(String path)<br>​                    2. 使用RequestDispatcher对象来进行转发：forward(ServletRequest request, ServletResponse response)<br>​<br>                2. 特点：<br>                    1. 浏览器地址栏路径不发生变化<br>                    2. 只能转发到当前服务器内部资源中。<br>                    3. 转发是一次请求</p>
+<pre><code>3. 共享数据：
     * 域对象：一个有作用范围的对象，可以在范围内共享数据
     * request域：代表一次请求的范围，一般用于请求转发的多个资源中共享数据
     * 方法：
         1. void setAttribute(String name,Object obj):存储数据
-        2. Object getAttitude(String name):通过键获取值
+        2. Object getAttribute(String name):通过键获取值
         3. void removeAttribute(String name):通过键移除键值对
 
 4. 获取ServletContext：
@@ -184,12 +175,8 @@
 
             private int id;
             private String username;
-            private String password;</code></pre><p>​<br>                public int getId() {<br>                    return id;<br>                }</p>
-<pre><code>        public void setId(int id) {
-            this.id = id;
-        }
-
-        public String getUsername() {
+            private String password;</code></pre><p>​<br>​                public int getId() {<br>​                    return id;<br>​                }<br>​<br>                public void setId(int id) {<br>                    this.id = id;<br>                }</p>
+<pre><code>        public String getUsername() {
             return username;
         }
 
@@ -258,10 +245,8 @@
          */
         public static DataSource getDataSource(){
             return ds;
-        }</code></pre><p>​<br>                /**<br>                 * 获取连接Connection对象<br>                 */<br>                public static Connection getConnection() throws SQLException {<br>                    return  ds.getConnection();<br>                }<br>            }<br>        5. 创建包cn.itcast.dao,创建类UserDao,提供login方法</p>
-<pre><code>package cn.itcast.dao;
-
-import cn.itcast.domain.User;
+        }</code></pre><p>​<br>​                /**<br>​                 * 获取连接Connection对象<br>​                 */<br>​                public static Connection getConnection() throws SQLException {<br>​                    return  ds.getConnection();<br>​                }<br>​            }<br>​        5. 创建包cn.itcast.dao,创建类UserDao,提供login方法<br>​<br>            package cn.itcast.dao;</p>
+<pre><code>import cn.itcast.domain.User;
 import cn.itcast.util.JDBCUtils;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -287,25 +272,18 @@ public class UserDao {
             //2.调用query方法
             User user = template.queryForObject(sql,
                     new BeanPropertyRowMapper&lt;User&gt;(User.class),
-                    loginUser.getUsername(), loginUser.getPassword());</code></pre><p>​<br>                        return user;<br>                    } catch (DataAccessException e) {<br>                        e.printStackTrace();//记录日志<br>                        return null;<br>                    }<br>                }<br>            }</p>
-<pre><code>6. 编写cn.itcast.web.servlet.LoginServlet类
-    package cn.itcast.web.servlet;
+                    loginUser.getUsername(), loginUser.getPassword());</code></pre><p>​<br>​                        return user;<br>​                    } catch (DataAccessException e) {<br>​                        e.printStackTrace();//记录日志<br>​                        return null;<br>​                    }<br>​                }<br>​            }<br>​<br>        6. 编写cn.itcast.web.servlet.LoginServlet类<br>            package cn.itcast.web.servlet;</p>
+<pre><code>import cn.itcast.dao.UserDao;
+import cn.itcast.domain.User;
 
-    import cn.itcast.dao.UserDao;
-    import cn.itcast.domain.User;
-
-    import javax.servlet.ServletException;
-    import javax.servlet.annotation.WebServlet;
-    import javax.servlet.http.HttpServlet;
-    import javax.servlet.http.HttpServletRequest;
-    import javax.servlet.http.HttpServletResponse;
-    import java.io.IOException;</code></pre><p>​<br>            @WebServlet(“/loginServlet”)<br>            public class LoginServlet extends HttpServlet {</p>
-<p>​<br>                @Override<br>                protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {<br>                    //1.设置编码<br>                    req.setCharacterEncoding(“utf-8”);<br>                    //2.获取请求参数<br>                    String username = req.getParameter(“username”);<br>                    String password = req.getParameter(“password”);<br>                    //3.封装user对象<br>                    User loginUser = new User();<br>                    loginUser.setUsername(username);<br>                    loginUser.setPassword(password);</p>
-<pre><code>            //4.调用UserDao的login方法
-            UserDao dao = new UserDao();
-            User user = dao.login(loginUser);
-
-            //5.判断user
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;</code></pre><p>​<br>​            @WebServlet(“/loginServlet”)<br>​            public class LoginServlet extends HttpServlet {</p>
+<p>​<br>​                @Override<br>​                protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {<br>​                    //1.设置编码<br>​                    req.setCharacterEncoding(“utf-8”);<br>​                    //2.获取请求参数<br>​                    String username = req.getParameter(“username”);<br>​                    String password = req.getParameter(“password”);<br>​                    //3.封装user对象<br>​                    User loginUser = new User();<br>​                    loginUser.setUsername(username);<br>​                    loginUser.setPassword(password);<br>​<br>                    //4.调用UserDao的login方法<br>                    UserDao dao = new UserDao();<br>                    User user = dao.login(loginUser);</p>
+<pre><code>            //5.判断user
             if(user == null){
                 //登录失败
                 req.getRequestDispatcher(&quot;/failServlet&quot;).forward(req,resp);
@@ -339,7 +317,7 @@ public class UserDao {
                 response.setContentType(&quot;text/html;charset=utf-8&quot;);
                 //输出
                 response.getWriter().write(&quot;登录成功！&quot;+user.getUsername()+&quot;,欢迎您&quot;);
-            }</code></pre><p>​<br>                }        </p>
+            }</code></pre><p>​<br>​                }        </p>
 <pre><code>    @WebServlet(&quot;/failServlet&quot;)
     public class FailServlet extends HttpServlet {
         protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -382,4 +360,4 @@ public class UserDao {
     3. 方法：
         1. setProperty()
         2. getProperty()
-        3. populate(Object obj , Map map):将map集合的键值对信息，封装到对应的JavaBean对象中</code></pre></div><div class="post-copyright"><blockquote><p>原文作者: ZJS(zjisheng)</p><p>原文链接: <a href="http://yoursite.com/2020/04/14/Servlet-HTTP-Request笔记/">http://yoursite.com/2020/04/14/Servlet-HTTP-Request笔记/</a></p><p>版权声明: 转载请注明出处(必须保留作者署名及链接)</p></blockquote></div><div class="tags"></div><div class="post-share"><div class="social-share"><span>分享到:</span></div></div><div class="post-nav"><a href="/2020/04/14/Response笔记/" class="pre">Response笔记</a><a href="/2019/11/04/缓冲流、转换流、序列化流/" class="next">缓冲流、转换流、序列化流</a></div><div id="comments"></div></div></div></div><div class="layout-r"><div id="sidebar"><div class="search-pla"></div><div id="toc" class="widget"><div class="widget-title"><i class="fa fa-fei">文章目录</i></div><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#今日内容："><span class="toc-text">今日内容：</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Servlet："><span class="toc-text">Servlet：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTP："><span class="toc-text">HTTP：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Request："><span class="toc-text">Request：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#案例：用户登录"><span class="toc-text">案例：用户登录</span></a></li></ol></li></ol></div><div class="widget"><div class="widget-title"><i class="fa fa-xie"> 最新文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/04/14/Response笔记/">Response笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/14/Servlet-HTTP-Request笔记/">Servlet&HTTP&Request笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/04/缓冲流、转换流、序列化流/">缓冲流、转换流、序列化流</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/04/字节流、字符流/">字节流、字符流</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/04/File类、递归/">File类、递归</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/04/线程池和Lambda表达式/">线程池和Lambda表达式</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/16/SpringMVC响应数据和结果视图/">SpringMVC响应数据和结果视图</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/13/SpringMVC常用注解/">SpringMVC常用注解</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/30/Thread类/">Thread类</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/30/img/">img</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-gui"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/SpringMVC/">SpringMVC</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java基础/">java基础</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/牛客题库/">牛客题库</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/黑马程序员学习资料/">黑马程序员学习资料</a><span class="category-list-count">2</span></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-biao"> 标签</i></div><div class="tagcloud"><a href="/tags/时间日历/" style="font-size: 15px;">时间日历</a> <a href="/tags/集合/" style="font-size: 15px;">集合</a> <a href="/tags/Java专题练习/" style="font-size: 15px;">Java专题练习</a> <a href="/tags/响应数据和结果视图/" style="font-size: 15px;">响应数据和结果视图</a> <a href="/tags/文件/" style="font-size: 15px;">文件</a> <a href="/tags/线程/" style="font-size: 15px;">线程</a> <a href="/tags/常用注解/" style="font-size: 15px;">常用注解</a> <a href="/tags/网络编程/" style="font-size: 15px;">网络编程</a> <a href="/tags/流/" style="font-size: 15px;">流</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-archive"> 归档</i></div><ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-you"> 友情链接</i></div><ul></ul><a href="http://www.example1.com/" title="site-name1" target="_blank">site-name1</a><ul></ul><a href="http://www.example2.com/" title="site-name2" target="_blank">site-name2</a><ul></ul><a href="http://www.example3.com/" title="site-name3" target="_blank">site-name3</a></div></div></div></div><a id="totop" href="#top"></a><div id="footer"><div class="footer-info"><p><a href="/baidusitemap.xml">网站地图</a> |  <a href="/atom.xml">订阅本站</a> |  <a href="/about/">联系博主</a></p><p>本站总访问量：<i id="busuanzi_container_site_pv"><i id="busuanzi_value_site_pv"></i></i>次，本站总访客数:<i id="busuanzi_container_site_uv"><i id="busuanzi_value_site_uv"></i></i>人</p><p><span> Copyright &copy;<a href="/." rel="nofollow">ZJS(zjisheng).</a></span><span> Theme by<a rel="nofollow" target="_blank" href="https://github.com/chaooo/hexo-theme-BlueLake"> BlueLake.</a></span><span> Count by<a href="http://busuanzi.ibruce.info/"> busuanzi.</a></span><span> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a></span></p></div></div></div><script src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script><script type="text/javascript" src="/js/search.json.js?v=2.0.4"></script><script type="text/javascript" src="/js/toctotop.js?v=2.0.4" async></script><link rel="stylesheet" type="text/css" href="/share/css/share.css"><script type="text/javascript" src="/share/js/social-share.js" charset="utf-8"></script><script type="text/javascript" src="/share/js/qrcode.js" charset="utf-8"></script></body></html>
+        3. populate(Object obj , Map map):将map集合的键值对信息，封装到对应的JavaBean对象中</code></pre></div><div class="post-copyright"><blockquote><p>原文作者: ZJS(zjisheng)</p><p>原文链接: <a href="http://yoursite.com/2020/04/14/Servlet-HTTP-Request笔记/">http://yoursite.com/2020/04/14/Servlet-HTTP-Request笔记/</a></p><p>版权声明: 转载请注明出处(必须保留作者署名及链接)</p></blockquote></div><div class="tags"></div><div class="post-share"><div class="social-share"><span>分享到:</span></div></div><div class="post-nav"><a href="/2020/04/14/Response笔记/" class="pre">Response笔记</a><a href="/2019/11/04/缓冲流、转换流、序列化流/" class="next">缓冲流、转换流、序列化流</a></div><div id="comments"></div></div></div></div><div class="layout-r"><div id="sidebar"><div class="search-pla"></div><div id="toc" class="widget"><div class="widget-title"><i class="fa fa-fei">文章目录</i></div><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#今日内容："><span class="toc-text">今日内容：</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Servlet："><span class="toc-text">Servlet：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTP："><span class="toc-text">HTTP：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Request："><span class="toc-text">Request：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#案例：用户登录"><span class="toc-text">案例：用户登录</span></a></li></ol></li></ol></div><div class="widget"><div class="widget-title"><i class="fa fa-xie"> 最新文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/04/20/Cookie-Session笔记/">Cookie&Session笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/14/Response笔记/">Response笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/14/Servlet-HTTP-Request笔记/">Servlet&HTTP&Request笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/04/缓冲流、转换流、序列化流/">缓冲流、转换流、序列化流</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/04/字节流、字符流/">字节流、字符流</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/04/File类、递归/">File类、递归</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/04/线程池和Lambda表达式/">线程池和Lambda表达式</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/16/SpringMVC响应数据和结果视图/">SpringMVC响应数据和结果视图</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/13/SpringMVC常用注解/">SpringMVC常用注解</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/30/Thread类/">Thread类</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-gui"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/SpringMVC/">SpringMVC</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java基础/">java基础</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/牛客题库/">牛客题库</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/黑马程序员学习资料/">黑马程序员学习资料</a><span class="category-list-count">3</span></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-biao"> 标签</i></div><div class="tagcloud"><a href="/tags/集合/" style="font-size: 15px;">集合</a> <a href="/tags/时间日历/" style="font-size: 15px;">时间日历</a> <a href="/tags/Java专题练习/" style="font-size: 15px;">Java专题练习</a> <a href="/tags/响应数据和结果视图/" style="font-size: 15px;">响应数据和结果视图</a> <a href="/tags/文件/" style="font-size: 15px;">文件</a> <a href="/tags/常用注解/" style="font-size: 15px;">常用注解</a> <a href="/tags/线程/" style="font-size: 15px;">线程</a> <a href="/tags/网络编程/" style="font-size: 15px;">网络编程</a> <a href="/tags/流/" style="font-size: 15px;">流</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-archive"> 归档</i></div><ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-you"> 友情链接</i></div><ul></ul><a href="http://www.example1.com/" title="site-name1" target="_blank">site-name1</a><ul></ul><a href="http://www.example2.com/" title="site-name2" target="_blank">site-name2</a><ul></ul><a href="http://www.example3.com/" title="site-name3" target="_blank">site-name3</a></div></div></div></div><a id="totop" href="#top"></a><div id="footer"><div class="footer-info"><p><a href="/baidusitemap.xml">网站地图</a> |  <a href="/atom.xml">订阅本站</a> |  <a href="/about/">联系博主</a></p><p>本站总访问量：<i id="busuanzi_container_site_pv"><i id="busuanzi_value_site_pv"></i></i>次，本站总访客数:<i id="busuanzi_container_site_uv"><i id="busuanzi_value_site_uv"></i></i>人</p><p><span> Copyright &copy;<a href="/." rel="nofollow">ZJS(zjisheng).</a></span><span> Theme by<a rel="nofollow" target="_blank" href="https://github.com/chaooo/hexo-theme-BlueLake"> BlueLake.</a></span><span> Count by<a href="http://busuanzi.ibruce.info/"> busuanzi.</a></span><span> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a></span></p></div></div></div><script src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script><script type="text/javascript" src="/js/search.json.js?v=2.0.4"></script><script type="text/javascript" src="/js/toctotop.js?v=2.0.4" async></script><link rel="stylesheet" type="text/css" href="/share/css/share.css"><script type="text/javascript" src="/share/js/social-share.js" charset="utf-8"></script><script type="text/javascript" src="/share/js/qrcode.js" charset="utf-8"></script></body></html>
